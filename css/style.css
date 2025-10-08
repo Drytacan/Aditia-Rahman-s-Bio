@@ -4,6 +4,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	scroll-behavior: smooth;
 }
 
 body {
@@ -35,9 +36,14 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background: rgba(0,0,0,0.7);
+	background: rgba(0,0,0,0.6);
 	backdrop-filter: blur(8px);
 	z-index: 1000;
+	transition: background 0.3s ease;
+}
+
+.navbar.scrolled {
+	background: rgba(0,0,0,0.85);
 }
 
 .logo {
@@ -46,16 +52,30 @@ body {
 	letter-spacing: 1px;
 }
 
+.menu {
+	display: flex;
+	gap: 25px;
+}
+
 .menu a {
 	color: white;
 	text-decoration: none;
-	margin-left: 25px;
 	font-weight: 500;
 	transition: color 0.3s;
 }
 
 .menu a:hover {
 	color: #00e6a8;
+}
+
+/* Toggle button (mobile) */
+.menu-toggle {
+	display: none;
+	background: none;
+	border: none;
+	color: white;
+	font-size: 26px;
+	cursor: pointer;
 }
 
 /* --- Hero Section --- */
@@ -146,21 +166,42 @@ footer {
 	border-top: 1px solid rgba(255,255,255,0.1);
 }
 
+/* --- Animations --- */
+.reveal {
+	opacity: 0;
+	transform: translateY(50px);
+	transition: all 0.8s ease-out;
+}
+
+.reveal.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
 	.navbar {
+		padding: 10px 25px;
+	}
+
+	.menu {
+		display: none;
 		flex-direction: column;
-		gap: 10px;
-		padding: 10px 20px;
+		background: rgba(0,0,0,0.9);
+		position: absolute;
+		top: 60px;
+		right: 0;
+		padding: 20px;
+		border-radius: 8px;
+		width: 180px;
 	}
 
-	.menu a {
-		margin: 0 10px;
-		font-size: 0.95em;
+	.menu.show {
+		display: flex;
 	}
 
-	.hero {
-		padding-top: 160px;
+	.menu-toggle {
+		display: block;
 	}
 
 	.intro {
